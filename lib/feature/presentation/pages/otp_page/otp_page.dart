@@ -4,7 +4,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:pinput/pinput.dart';
 import 'package:qazo_namozlar/core/extentions/padding_extension.dart';
 import 'package:qazo_namozlar/core/theme/app_colors.dart';
 import 'package:qazo_namozlar/feature/presentation/bloc/otp_bloc/otp_bloc.dart';

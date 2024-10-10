@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:qazo_namozlar/core/theme/app_svg.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:qazo_namozlar/core/extentions/padding_extension.dart';
 import 'package:qazo_namozlar/core/theme/theme.dart';
 import 'package:qazo_namozlar/core/utils/app_locale_keys.dart';
 import 'package:qazo_namozlar/feature/presentation/pages/language_page/widget/language_container_widget.dart';
-
-import '../../../../core/utils/app_utils.dart';
+import 'package:qazo_namozlar/feature/presentation/widgets/app_widgets.dart';
 
 class LanguagePage extends StatelessWidget {
   const LanguagePage({super.key});
@@ -14,39 +13,45 @@ class LanguagePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
-        padding: AppUtils.kPaddingHor20,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            AppUtils.kSizedBoxH80,
-            SvgPicture.asset(AppSvg.icMainDark),
-            const Text(
-              AppLocaleKeys.selectLang,
-              style: AppTextStyle.w600H20,
-            ),
-            const Column(
+    return Container(
+      color: AppColors.backgroundColor,
+      child: SafeArea(
+        child: Scaffold(
+          backgroundColor: AppColors.backgroundColor,
+          body: Container(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                LanguageContainer(
-                  image: AppSvg.icUz,
-                  text: AppLocaleKeys.uz,
+                AppWidgets.imageSvg(
+                  path: AppSvg.icMainDark,
+                  height: 90.h,
+                  width: 144.w,
                 ),
-                AppUtils.kDivider,
-                LanguageContainer(
-                  image: AppSvg.icUz,
-                  text: AppLocaleKeys.uzRu,
+                AppWidgets.textLocale(
+                        text: AppLocaleKeys.selectLang,
+                        fontSize: 20.sp,
+                        fontWeight: FontWeight.w600,
+                        color: AppColors.dark)
+                    .paddingOnly(bottom: 70.h, top: 80.h),
+                const Column(
+                  children: [
+                    LanguageContainer(
+                      image: AppSvg.icUz,
+                      text: AppLocaleKeys.uz,
+                    ),
+                    LanguageContainer(
+                      image: AppSvg.icUz,
+                      text: AppLocaleKeys.uzRu,
+                    ),
+                    LanguageContainer(
+                      image: AppSvg.icRu,
+                      text: AppLocaleKeys.ru,
+                    ),
+                  ],
                 ),
-                AppUtils.kDivider,
-                LanguageContainer(
-                  image: AppSvg.icRu,
-                  text: AppLocaleKeys.ru,
-                ),
-                AppUtils.kDivider,
               ],
-            ),
-            AppUtils.kSizedBoxH80,
-          ],
+            ).paddingOnly(left: 20.w, right: 20.w, top: 40.h),
+          ),
         ),
       ),
     );

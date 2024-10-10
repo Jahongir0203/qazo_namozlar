@@ -1,14 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:qazo_namozlar/core/theme/app_colors.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:qazo_namozlar/core/extentions/padding_extension.dart';
+import 'package:qazo_namozlar/core/theme/theme.dart';
 import 'package:qazo_namozlar/core/utils/app_locale_keys.dart';
 import 'package:qazo_namozlar/feature/presentation/pages/on_boarding_page/on_boarding_page.dart';
-import 'package:qazo_namozlar/main.dart';
-
-import '../../../../../core/theme/app_svg.dart';
-import '../../../../../core/theme/app_text_style.dart';
-import '../../../../../core/utils/app_utils.dart';
+import 'package:qazo_namozlar/feature/presentation/widgets/app_widgets.dart';
 
 class LanguageContainer extends StatelessWidget {
   const LanguageContainer({
@@ -22,45 +19,48 @@ class LanguageContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: AppUtils.kPaddingHor10Ver25,
-      child: GestureDetector(
-        onTap: () {
-          // text == AppLocaleKeys.uz
-          //     ? print("UZ")
-          //     : text == AppLocaleKeys.ru
-          //         ? print('ru')
-          //         : print('cyrl');
-
-          text == AppLocaleKeys.uz
-              ? context.setLocale(
-                  const Locale('uz', 'UZ'),
-                )
-              : text == AppLocaleKeys.ru
-                  ? context.setLocale(
-                      const Locale('ru', 'RU'),
-                    )
-                  : context.setLocale(
-                      const Locale('uz', 'Cyrl'),
-                    );
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => OnBoardingPage(),
-              ));
-        },
+    return GestureDetector(
+      onTap: () {
+        text == AppLocaleKeys.uz
+            ? context.setLocale(
+                const Locale('uz', 'UZ'),
+              )
+            : text == AppLocaleKeys.ru
+                ? context.setLocale(
+                    const Locale('ru', 'RU'),
+                  )
+                : context.setLocale(
+                    const Locale('uz', 'Cyrl'),
+                  );
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => OnBoardingPage(),
+          ),
+        );
+      },
+      child: Container(
+        decoration: const BoxDecoration(
+          border: Border(
+            bottom: BorderSide(color: AppColors.dark),
+          ),
+        ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SvgPicture.asset(image),
-            AppUtils.kSizedBoxW5,
-            Text(
-              text,
-              style: AppTextStyle.w600H18,
-            ),
+            AppWidgets.imageSvg(
+              path: image,
+              height: 30.h,
+              width: 30.w,
+            ).paddingOnly(right: 5.w),
+            AppWidgets.textLocale(
+                text: text,
+                fontWeight: FontWeight.w600,
+                fontSize: 18.sp,
+                color: AppColors.dark),
           ],
-        ),
+        ).paddingSymmetric(horizontal: 10.w, vertical: 25.h),
       ),
     );
   }

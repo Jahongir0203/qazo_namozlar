@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import '../theme/app_colors.dart';
 
 sealed class AppUtils {
   AppUtils._();
+
 
   /// SizedBox
   static const kSizedBoxW5 = SizedBox(width: 5);
